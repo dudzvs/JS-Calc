@@ -17,9 +17,9 @@ class Calculator {
 
   mapkey() {
     window.addEventListener("keydown", (e) => {
-  
+      e.preventDefault()
       let keyboardKey = e.key
-      const keyOperations = ['+', '-', '*', '/']
+      const keyOperations = ['+', '-', '*', '/', '.', 'Backspace']
       
       
       if(keyboardKey >= 0 && keyboardKey <= 9) {
@@ -34,6 +34,10 @@ class Calculator {
         this.processOperation(keyboardKey)
       }else if(keyboardKey === keyOperations[3]) {
         this.processOperation(keyboardKey)
+      }else if (keyboardKey === keyOperations[4]) {
+        this.addDigit(keyboardKey)
+      }else if(keyboardKey === keyOperations[5]) {
+        this.processDelOperator(keyboardKey)
       }
     }) 
   }
