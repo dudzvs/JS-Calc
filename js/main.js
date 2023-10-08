@@ -1,12 +1,41 @@
 const previousOperationText = document.querySelector("#previous-operation");
 const currentOperationText = document.querySelector("#current-operation");
 const buttons = document.querySelectorAll("#button-container button");
+const $html = document.querySelector('html')
+const toggleMode = document.querySelector('.darkLighMode')
+
+toggleMode.onclick = () => $html.classList.toggle('darkMode')
 
 class Calculator {
   constructor(previousOperationText, currentOperationText) {
     this.previousOperationText = previousOperationText;
     this.currentOperationText = currentOperationText;
     this.currentOperation = "";
+
+    this.mapkey()
+  }
+
+  mapkey() {
+    window.addEventListener("keydown", (e) => {
+      e.preventDefault()
+      let keyboardKey = e.key
+      const keyOperations = ['+', '-', '*', '/']
+      
+      
+      if(keyboardKey >= 0 && keyboardKey <= 9) {
+        this.addDigit(keyboardKey)
+      }else if(keyboardKey === 'Enter') {
+        this.processEqualOperator()
+      }else if(keyboardKey === keyOperations[0]) {
+        this.processOperation(keyboardKey)
+      }else if(keyboardKey === keyOperations[1]) {
+        this.processOperation(keyboardKey)
+      }else if(keyboardKey === keyOperations[2]) {
+        this.processOperation(keyboardKey)
+      }else if(keyboardKey === keyOperations[3]) {
+        this.processOperation(keyboardKey)
+      }
+    }) 
   }
 
   // add digit to calculator screen
@@ -34,24 +63,24 @@ class Calculator {
 
     // Get current and previous values
     let operationValue;
-    let previous = +this.previousOperationText.innerText.split(" ")[0];
-    let current = +this.currentOperationText.innerText;
+    const previous = +this.previousOperationText.innerText.split(" ")[0];
+    const current = +this.currentOperationText.innerText;
 
     switch (operation) {
       case "+":
-        operationValue = previous + current;
+        operationValue = Math.round(Number(previous + current));
         this.updateScreen(operationValue, operation, current, previous);
         break;
       case "-":
-        operationValue = previous - current;
+        operationValue = Math.round(Number(previous - current) * 1000) / 1000;
         this.updateScreen(operationValue, operation, current, previous);
         break;
       case "*":
-        operationValue = previous * current;
+        operationValue = Math.round(Number(previous * current) * 1000) / 1000;
         this.updateScreen(operationValue, operation, current, previous);
         break;
       case "/":
-        operationValue = previous / current;
+        operationValue = Math.round(Number(previous / current) * 1000) / 1000;
         this.updateScreen(operationValue, operation, current, previous);
         break;
       case "DEL":
