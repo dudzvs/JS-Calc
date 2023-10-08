@@ -17,7 +17,7 @@ class Calculator {
 
   mapkey() {
     window.addEventListener("keydown", (e) => {
-      e.preventDefault()
+  
       let keyboardKey = e.key
       const keyOperations = ['+', '-', '*', '/']
       
@@ -68,19 +68,19 @@ class Calculator {
 
     switch (operation) {
       case "+":
-        operationValue = Math.round(Number(previous + current));
+        operationValue = previous + current;
         this.updateScreen(operationValue, operation, current, previous);
         break;
       case "-":
-        operationValue = Math.round(Number(previous - current) * 1000) / 1000;
+        operationValue = previous - current;
         this.updateScreen(operationValue, operation, current, previous);
         break;
       case "*":
-        operationValue = Math.round(Number(previous * current) * 1000) / 1000;
+        operationValue = previous * current;
         this.updateScreen(operationValue, operation, current, previous);
         break;
       case "/":
-        operationValue = Math.round(Number(previous / current) * 1000) / 1000;
+        operationValue = previous / current;
         this.updateScreen(operationValue, operation, current, previous);
         break;
       case "DEL":
